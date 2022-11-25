@@ -36,7 +36,29 @@ ensembl
 # 3. How to build a biomaRt query
 
 affyids <- c("202763_at","209310_s_at","207500_at")
+
 getBM(attributes = c('affy_hg_u133_plus_2', 'entrezgene_id'),
       filters = 'affy_hg_u133_plus_2',
       values = affyids, 
       mart = ensembl)
+
+getBM(attributes = c('affy_hg_u133_plus_2', 'hgnc_symbol',
+                     'chromosome_name','start_position',
+                     'end_position', 'band'),
+      filters = 'affy_hg_u133_plus_2', 
+      values = affyids, 
+      mart = ensembl)
+
+# 4. original
+ID=read.csv ("./data/affyIDList.csv",  header=FALSE)
+ID
+
+ID_list = ID$V1
+ID_list
+
+export_data <- getBM(attributes = c('affy_hg_u133_plus_2', 'hgnc_symbol'),
+      filters = 'affy_hg_u133_plus_2', 
+      values = ID_list, 
+      mart = ensembl)
+
+write.csv(x = export_data, file = "./data/exportdata.csv")
