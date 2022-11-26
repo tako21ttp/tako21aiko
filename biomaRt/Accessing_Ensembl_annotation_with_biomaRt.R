@@ -50,15 +50,15 @@ getBM(attributes = c('affy_hg_u133_plus_2', 'hgnc_symbol',
       mart = ensembl)
 
 # 4. original
-ID=read.csv ("./data/affyIDList.csv",  header=FALSE)
+ID=read.csv ("./data/mydata.csv",  header=FALSE)
 ID
 
 ID_list = ID$V1
-ID_list
+length(ID_list)
 
 export_data <- getBM(attributes = c('affy_hg_u133_plus_2', 'hgnc_symbol'),
       filters = 'affy_hg_u133_plus_2', 
       values = ID_list, 
       mart = ensembl)
-
-write.csv(x = export_data, file = "./data/exportdata.csv")
+export_data
+write.csv(x = export_data, file = "./data/exportdata4.csv")
